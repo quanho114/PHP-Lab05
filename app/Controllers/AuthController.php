@@ -4,7 +4,8 @@ class AuthController
 {
     private function db(): PDO
     {
-        return Database::getInstance()->getConnection();
+        $config = require __DIR__ . '/../../config/database.php';
+        return (new Database($config))->getConnection();
     }
  
     public function showLogin(): void
