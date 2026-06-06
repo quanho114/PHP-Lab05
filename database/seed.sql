@@ -2,8 +2,8 @@ USE web_php_lab05_clinic;
 
 INSERT INTO users (name, email, password_hash, role)
 VALUES
-('Admin User', 'admin@example.com', '$2y$10$examplehashadmin', 'admin'),
-('Clinic Staff', 'staff@example.com', '$2y$10$examplehashstaff', 'staff');
+('Admin User', 'admin@example.com', '$2y$12$TBYvIXdl7ZBJScHl6gyZuOZrqC48L0k0PibU1nNb/ATnyxybtkicq', 'admin'),
+('Clinic Staff', 'staff@example.com', '$2y$12$TBYvIXdl7ZBJScHl6gyZuOZrqC48L0k0PibU1nNb/ATnyxybtkicq', 'staff');
 
 INSERT INTO patients (name, email, phone, gender, note, created_at)
 VALUES

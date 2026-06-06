@@ -12,6 +12,7 @@
  
 <div class="form-container-grid <?= !empty($isDuplicate) ? 'duplicate-grid' : '' ?>">
     <form method="post" action="/appointments/update" class="form-card-horizontal">
+        <?= csrf_field() ?>
         <input type="hidden" name="id" value="<?= e($id) ?>">
  
         <div class="form-row">

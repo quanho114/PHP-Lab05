@@ -28,6 +28,7 @@ $uriPath = explode('?', $uri)[0];
             </div>
             
             <!-- Horizontal Navigation Menu -->
+            <?php if (isset($_SESSION['user'])): ?>
             <nav class="navbar-menu">
                 <a href="/" class="menu-item <?= $uriPath === '/' ? 'active' : '' ?>">
                     <span>Dashboard</span>
@@ -53,6 +54,17 @@ $uriPath = explode('?', $uri)[0];
                     <span>Health Metrics</span>
                 </a>
             </nav>
+ 
+            <!-- User Profile Section -->
+            <div class="navbar-user">
+                <span class="user-name"><?= e($_SESSION['user']['name']) ?></span>
+                <span class="user-role-badge <?= e($_SESSION['user']['role']) ?>"><?= ucfirst(e($_SESSION['user']['role'])) ?></span>
+                <form method="post" action="/logout" class="inline-logout-form">
+                    <?= csrf_field() ?>
+                    <button type="submit" class="logout-btn-link">Logout</button>
+                </form>
+            </div>
+            <?php endif; ?>
         </div>
     </header>
     

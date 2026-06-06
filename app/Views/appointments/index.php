@@ -69,6 +69,7 @@
                     <div class="actions-wrapper">
                         <a href="/appointments/edit?id=<?= e($appt['id']) ?>" class="btn edit-btn">Edit</a>
                         <form method="post" action="/appointments/delete" class="inline" onsubmit="return confirm('Cancel/delete this appointment?')">
+                            <?= csrf_field() ?>
                             <input type="hidden" name="id" value="<?= e($appt['id']) ?>">
                             <button type="submit" class="link danger">Delete</button>
                         </form>

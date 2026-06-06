@@ -1,4 +1,5 @@
-CREATE DATABASE IF NOT EXISTS web_php_lab05_clinic
+DROP DATABASE IF EXISTS web_php_lab05_clinic;
+CREATE DATABASE web_php_lab05_clinic
 CHARACTER SET utf8mb4
 COLLATE utf8mb4_unicode_ci;
 
@@ -24,12 +25,14 @@ CREATE TABLE patients (
   note TEXT,
   created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at DATETIME NULL,
+  deleted_at DATETIME NULL,
   UNIQUE KEY unique_patient_email (email),
   INDEX idx_patients_created_at (created_at),
   INDEX idx_patients_gender_created_at (gender, created_at),
-  INDEX idx_patients_phone (phone)
+  INDEX idx_patients_phone (phone),
+  INDEX idx_patients_deleted_at (deleted_at)
 );
-
+ 
 CREATE TABLE appointments (
   id INT AUTO_INCREMENT PRIMARY KEY,
   appointment_code VARCHAR(50) NOT NULL,
@@ -40,8 +43,10 @@ CREATE TABLE appointments (
   note TEXT,
   created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at DATETIME NULL,
+  deleted_at DATETIME NULL,
   UNIQUE KEY unique_appointment_code (appointment_code),
   INDEX idx_appointments_created_at (created_at),
   INDEX idx_appointments_status_created_at (status, created_at),
-  INDEX idx_appointments_patient_email (patient_email)
+  INDEX idx_appointments_patient_email (patient_email),
+  INDEX idx_appointments_deleted_at (deleted_at)
 );

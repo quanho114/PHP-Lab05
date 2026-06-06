@@ -69,6 +69,7 @@
                     <div class="actions-wrapper">
                         <a href="/patients/edit?id=<?= e($patient['id']) ?>" class="btn edit-btn">Edit</a>
                         <form method="post" action="/patients/delete" class="inline" onsubmit="return confirm('Delete this patient record?')">
+                            <?= csrf_field() ?>
                             <input type="hidden" name="id" value="<?= e($patient['id']) ?>">
                             <button type="submit" class="link danger">Delete</button>
                         </form>

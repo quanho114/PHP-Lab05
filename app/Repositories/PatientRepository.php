@@ -7,7 +7,7 @@ class PatientRepository
     public function countAll(string $keyword = '', string $gender = ''): int
     {
         $sql = "SELECT COUNT(*) AS total FROM patients";
-        $conditions = [];
+        $conditions = ["deleted_at IS NULL"];
         $params = [];
  
         if ($keyword !== '') {
@@ -44,7 +44,7 @@ class PatientRepository
         }
  
         $sql = "SELECT id, name, email, phone, gender, created_at FROM patients";
-        $conditions = [];
+        $conditions = ["deleted_at IS NULL"];
         $params = [];
  
         if ($keyword !== '') {
@@ -78,7 +78,7 @@ class PatientRepository
  
     public function findById(int $id): ?array
     {
-        $stmt = $this->db->prepare("SELECT * FROM patients WHERE id = :id");
+        $stmt = $this->db->prepare("SELECT * FROM patients WHERE id = :id AND deleted_at IS NULL");
         $stmt->execute(['id' => $id]);
         return $stmt->fetch() ?: null;
     }
@@ -130,7 +130,7 @@ class PatientRepository
  
     public function delete(int $id): bool
     {
-        $stmt = $this->db->prepare("DELETE FROM patients WHERE id = :id");
+        $stmt = $this->db->prepare("UPDATE patients SET deleted_at = NOW() WHERE id = :id");
         return $stmt->execute(['id' => $id]);
     }
 }

@@ -12,6 +12,7 @@
  
 <div class="form-container-grid <?= !empty($isDuplicate) ? 'duplicate-grid' : '' ?>">
     <form method="post" action="/appointments/store" class="form-card-horizontal">
+        <?= csrf_field() ?>
         <div class="form-row">
             <label for="appointment_code">Appointment Code</label>
             <div class="input-container">

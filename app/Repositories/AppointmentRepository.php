@@ -7,7 +7,7 @@ class AppointmentRepository
     public function countAll(string $keyword = '', string $status = ''): int
     {
         $sql = "SELECT COUNT(*) AS total FROM appointments";
-        $conditions = [];
+        $conditions = ["deleted_at IS NULL"];
         $params = [];
  
         if ($keyword !== '') {
@@ -44,7 +44,7 @@ class AppointmentRepository
         }
  
         $sql = "SELECT id, appointment_code, patient_name, patient_email, appointment_date, status, created_at FROM appointments";
-        $conditions = [];
+        $conditions = ["deleted_at IS NULL"];
         $params = [];
  
         if ($keyword !== '') {
@@ -77,7 +77,7 @@ class AppointmentRepository
  
     public function findById(int $id): ?array
     {
-        $stmt = $this->db->prepare("SELECT * FROM appointments WHERE id = :id");
+        $stmt = $this->db->prepare("SELECT * FROM appointments WHERE id = :id AND deleted_at IS NULL");
         $stmt->execute(['id' => $id]);
         return $stmt->fetch() ?: null;
     }
@@ -132,7 +132,7 @@ class AppointmentRepository
  
     public function delete(int $id): bool
     {
-        $stmt = $this->db->prepare("DELETE FROM appointments WHERE id = :id");
+        $stmt = $this->db->prepare("UPDATE appointments SET deleted_at = NOW() WHERE id = :id");
         return $stmt->execute(['id' => $id]);
     }
 }

@@ -1542,3 +1542,58 @@ textarea {
         grid-template-columns: 1fr;
     }
 }
+ 
+/* User Profile Menu in Navbar */
+.navbar-user {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+}
+ 
+.navbar-user .user-name {
+    font-weight: 600;
+    color: var(--text-main);
+}
+ 
+.user-role-badge {
+    padding: 2px 6px;
+    border-radius: var(--radius-sm);
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+ 
+.user-role-badge.admin {
+    background-color: var(--danger-bg);
+    color: var(--danger-text);
+    border: 1px solid var(--danger-border);
+}
+ 
+.user-role-badge.staff {
+    background-color: var(--success-bg);
+    color: var(--success-text);
+    border: 1px solid var(--success-border);
+}
+ 
+.inline-logout-form {
+    display: inline;
+}
+ 
+.logout-btn-link {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    padding: 4px 8px;
+    border-radius: var(--radius-sm);
+    transition: all 0.15s ease;
+}
+ 
+.logout-btn-link:hover {
+    color: var(--danger-text);
+    background-color: var(--danger-bg);
+}
