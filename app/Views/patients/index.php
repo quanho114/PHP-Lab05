@@ -86,18 +86,45 @@
                 <div class="pagination">
                     <?php if ($page > 1): ?>
                         <a href="/patients?<?= e(query_string(['page' => $page - 1])) ?>" class="page-link">Prev</a>
+                    <?php else: ?>
+                        <span class="page-link disabled" style="opacity: 0.5; pointer-events: none;">Prev</span>
                     <?php endif; ?>
 
                     <div class="page-numbers">
-                        <?php for ($i = 1; $i <= $totalPages; $i++): ?>
-                            <a href="/patients?<?= e(query_string(['page' => $i])) ?>" class="page-link <?= $page === $i ? 'active' : '' ?>">
+                        <?php
+                        $maxVisible = 10;
+                        $half = floor($maxVisible / 2);
+                        $startPage = max(1, $page - $half);
+                        $endPage = min($totalPages, $startPage + $maxVisible - 1);
+                        if ($endPage - $startPage + 1 < $maxVisible) {
+                            $startPage = max(1, $endPage - $maxVisible + 1);
+                        }
+                        ?>
+                        <?php if ($startPage > 1): ?>
+                            <a href="/patients?<?= e(query_string(['page' => 1])) ?>" class="page-link">1</a>
+                            <?php if ($startPage > 2): ?>
+                                <span class="page-ellipsis">...</span>
+                            <?php endif; ?>
+                        <?php endif; ?>
+
+                        <?php for ($i = $startPage; $i <= $endPage; $i++): ?>
+                            <a href="/patients?<?= e(query_string(['page' => $i])) ?>" class="page-link <?= (int)$page == $i ? 'active' : '' ?>">
                                 <?= $i ?>
                             </a>
                         <?php endfor; ?>
+
+                        <?php if ($endPage < $totalPages): ?>
+                            <?php if ($endPage < $totalPages - 1): ?>
+                                <span class="page-ellipsis">...</span>
+                            <?php endif; ?>
+                            <a href="/patients?<?= e(query_string(['page' => $totalPages])) ?>" class="page-link"><?= $totalPages ?></a>
+                        <?php endif; ?>
                     </div>
 
                     <?php if ($page < $totalPages): ?>
                         <a href="/patients?<?= e(query_string(['page' => $page + 1])) ?>" class="page-link">Next</a>
+                    <?php else: ?>
+                        <span class="page-link disabled" style="opacity: 0.5; pointer-events: none;">Next</span>
                     <?php endif; ?>
                 </div>
             </div>
